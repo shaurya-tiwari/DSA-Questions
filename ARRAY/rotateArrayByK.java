@@ -3,14 +3,29 @@ import java.util.Arrays;
 public class rotateArrayByK {
 
     public void rotate(int[] nums, int k) {
-        int temp = nums[0];
         int n = nums.length;
-        for (int i = 1; i <n; i++) {
-            nums[i - 1] = nums[i];
+        if (n == 0)
+            return ;
 
+
+        k = k%n;
+        revers(0, nums, n - 1); // full reverse
+        revers(0, nums, k - 1);// reverse till k
+        revers(k, nums, n - 1); // reverse rest after k 
+
+    }
+
+    // swap logic
+    public void revers(int left, int[] arr, int right) {
+        // check for small first element
+        while (left < right) {
+            // swap
+            int temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
         }
-        nums[n-1] = temp;
-
     }
 
     public static void main(String[] args) {
