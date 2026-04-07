@@ -19,6 +19,8 @@ public class uniunof2sortedarray {
 
 }
 
+
+//  when we use hashset - for unique value , and 0(1) timecomplexity 
 // concept
 // Sequential Loops: If you have one loop after another, you add them: $O(n + m)
 // Nested Loops: If you have a loop inside a loop, you multiply them: $O(n
