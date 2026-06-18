@@ -170,3 +170,32 @@ public class Linkedlisttt {
 
     }
 }
+
+
+
+// public void solveLinkedListProblem(ListNode head) {
+    
+//     // STEP 1: Base Case (Safety Check)
+//     // Hamesha check karein ki list khali toh nahi hai. Agar haan, toh wahin se wapas laut jayein.
+//     if (head == null) {
+//         return; 
+//     }
+
+//     // STEP 2: Dummy / Temp Pointer Banana (Golden Rule ⭐)
+//     // Asli 'head' (engine) ko KABHI aage mat badhana, warna aap list ka starting point bhool jayenge.
+//     // Hamesha ek duplicate pointer banayein chalne ke liye.
+//     ListNode current = head; 
+
+//     // STEP 3: Traversal Loop (List mein aage badhna)
+//     // Jab tak humari list khatam nahi hoti (null nahi aata), tab tak loop chalayein.
+//     while (current != null) {
+        
+//         // ---> YAHAN AAPKA MAIN LOGIC AAYEGA <---
+//         // (Jaise print karna, count karna, ya check karna)
+//         // System.out.println(current.val);
+
+//         // STEP 4: Aage Badhna (Sabse zaroori line)
+//         // Agar yeh line bhool gaye, toh infinite loop ban jayega!
+//         current = current.next; 
+//     }
+// }
