@@ -1,0 +1,144 @@
+// 1. Normal Binary Tree (BT) - Andhere mein teer
+// BT mein koi rule nahi hota, isliye jab tak answer na mil jaye, hume poora ped chhan-na (traverse) padta hai. Yahan do main hathiyar hote hain:
+
+// A. BT - DFS (Depth-First Search)
+// Kab use karein: Jab ek branch ki poori gehrai (depth) tak jana ho. (E.g., maximum depth nikalni ho, ya saare dabbe ikkathe karne hon).
+
+// Flow: Root -> Left poora khatam karo -> Right poora khatam karo.
+
+public void dfsBT(TreeNode root) {
+    if (root == null) return; // 1. Base case
+    
+    // root.val yahan check/print karo (Pre-order)
+    dfsBT(root.left);  // 2. Left bhago
+    dfsBT(root.right); // 3. Right bhago
+}
+
+// B. BT - BFS (Breadth-First Search / Level Order)
+// Kab use karein: Jab floor-by-floor (level by level) kaam karna ho. (E.g., Right side view dekhna ho, ya level sum nikalna ho).
+
+// Flow: Ek Queue (Line) banao. Dabba nikalo -> uske bache line mein lagao.
+
+public void bfsBT(TreeNode root) {
+    if (root == null) return;
+    Queue<TreeNode> q = new LinkedList<>();
+    q.add(root); // Root ko line mein lagao
+    
+    while (!q.isEmpty()) {
+        TreeNode curr = q.poll(); // Line se bahar nikalo
+        
+        if (curr.left != null) q.add(curr.left);   // Left bacha line mein
+        if (curr.right != null) q.add(curr.right); // Right bacha line mein
+    }
+}
+
+
+
+
+// 2. Binary Search Tree (BST) - The Smart Tree
+// BST mein ek mathematical rule hai (Left < Root < Right), isliye hum apna time waste nahi karte!
+
+// A. BST - Smart Search (O(log n))
+// Kab use karein: Jab value dhundhni ho, insert karni ho, ya Lowest Common Ancestor (LCA) nikalna ho.
+
+// Flow: Compare karo aur Aadha tree kaat do (ignore kar do). Kabhi bhi Left aur Right dono taraf ek sath mat jao.
+public TreeNode searchBST(TreeNode root, int val) {
+    if (root == null || root.val == val) return root; // Mil gaya ya rasta khatam
+    
+    if (val < root.val) {
+        return searchBST(root.left, val);  // Sirf Left jao
+    } else {
+        return searchBST(root.right, val); // Sirf Right jao
+    }
+}
+
+// B. BST - DFS (The "Inorder" Magic)
+// Kab use karein: Jab elements ko Sorted (chote se bada) order mein nikalna ho (E.g., Kth Smallest element).
+
+// Flow: Hamesha Left -> Root -> Right ka pattern lagao.
+public void inorderBST(TreeNode root, List<Integer> jhola) {
+    if (root == null) return;
+    
+    inorderBST(root.left, jhola); // 1. Pehle choton ko bulao
+    jhola.add(root.val);          // 2. Phir khud jhole mein jao
+    inorderBST(root.right, jhola);// 3. Phir badon ko bulao
+}
+
+// 📌 3. "What to ALWAYS do" (Aapka Master Checklist)
+// Jab bhi Tree ka naya question aaye, yeh 3 baatein aankh band karke likhni hain:
+
+// The Dead-End Check (Har code ki pehli line):
+if (root == null) return null; // (Ya return 0, return true jaisa question ho)
+// Bina iske code hamesha NullPointerException dega.
+
+// Manager & Worker Pattern (Helper Function):
+
+// Agar question mein aisi detail pass karni hai jo main function mein nahi hai (jaise humne Validation wale mein min aur max limits bheji thi, ya elements nikalne mein jhola bheja tha), toh turant ek private helper(...) function bana lo.
+
+// Returning a Subtree = Returning a Node:
+
+// Jab bhi kaha jaye ki "Tree ka wo hissa wapas bhej do", naya tree banane ki mehnat mat karo. Bas us main dabbe (node) par pahuncho aur return root; kar do. Uske left-right ke bache apne aap chipke hue wapas chale jayenge.
+
+
+
+
+
+// 🛡️ 1. The "Laxman Rekha" Pattern (BST Validation)
+// Kab use karein: Jab check karna ho ki tree ke saare nodes rule follow kar rahe hain ya nahi (E.g., LeetCode 98: Validate BST).
+
+// Core Logic: Har dabbe ko ek min aur max limit do. Agar wo apni limit tode, toh turant false bhej do. Left jate waqt max update karo, Right jate waqt min update karo.
+public boolean isValidBST(TreeNode root) {
+    return checkBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+}
+
+// THE MAIN LOGIC (Boundary Check)
+private boolean checkBST(TreeNode root, long min, long max) {
+    if (root == null) return true; // Base
+    
+    // TRAP CHECK: Kya apni aukaat (limits) cross ki?
+    if (root.val <= min || root.val >= max) return false; 
+    
+    // Left jao (Max limit = root.val) AUR Right jao (Min limit = root.val)
+    return checkBST(root.left, min, root.val) && checkBST(root.right, root.val, max);
+}
+
+// 🤝 2. The "Helper Function" (Manager-Worker Pattern)
+// Aakhir yeh Helper Function kab aur kyun banate hain?
+// LeetCode jo main function deta hai (Manager), wo aksar aage ka kaam akele nahi kar pata kyunki uske paas "Extra Samaan" uthane ke hath nahi hote. Tab hum apna Helper (Worker) banate hain.
+
+
+
+// 💡 KAB banayein? (When to use)
+// Jab "Extra Variable" recursion mein ghumana ho: Jaise pichle code mein min aur max limits bhejne the, par main function sirf TreeNode root maang raha tha.
+
+// Jab "Jhola" (List/Array) carry karna ho: Agar aapko saare nodes ikkathe karne hain, toh ek list ko har floor par bhejna padega. Main function mein wo list pass karne ki jagah nahi hoti.
+
+// Jab Main function aur Recursion ka "Return Type" alag ho: Main function ko array return karna hai, par aapko recursion mein Tree return karwana hai.
+
+// ❓ KYUN banayein? (Why not use Global Variables?)
+// Aap chaho toh class ke sabse upar int count = 0; likh sakte ho. Par interviews mein isko "Bad Practice" mana jata hai. Agar 2 test cases ek sath chal gaye, toh purana result naye result mein mix ho jayega. Helper function har test case ke liye ek clean slate (fresh variables) deta hai.
+
+
+// 💻 Example: The "Jhola" Pattern
+// Dekhiye kaise Manager ne list banayi aur Worker (Helper) ne usme data bhara:
+// 1. THE MANAGER (Main Function given by LeetCode)
+public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> jhola = new ArrayList<>(); // Naya khali jhola banaya
+    
+    // Helper ko bulao aur usko dabba (root) + jhola pakda do
+    fillJholaHelper(root, jhola); 
+    
+    return jhola; // Bhara hua jhola wapas bhej do
+}
+
+// 2. THE WORKER (Aapka custom Helper Function)
+// Notice kijiye: Iske parameters main function se zyada hain!
+private void fillJholaHelper(TreeNode root, List<Integer> jhola) {
+    if (root == null) return;
+    
+    fillJholaHelper(root.left, jhola); // Left bhago
+    jhola.add(root.val);               // Apna data jhole mein dalo
+    fillJholaHelper(root.right, jhola);// Right bhago
+}
+
+// Short Summary Rule: Jab bhi dimaag kahe ki "Yaar, mujhe is recursion loop mein ek extra variable chahiye (count, sum, max_value, list)", toh bina soche ek naya private helper() function bana lo!
