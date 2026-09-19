@@ -35,19 +35,18 @@
 
 public class KokoEatingBananas {
 //  TC = n log m 
-
+class Solution {
     public int minEatingSpeed(int[] piles, int h) {
         int left = 1;
         int right = 0;
         for (int i : piles) {
-
-            right = Math.max(i, right)
+            right = Math.max(i, right);
         }
         int answer = -1;
 
-        while (left < right) {
+        while (left <= right) {
             int mid = left + (right - left) / 2;
-            int totaltimeofkoko = helperfunctionfortimecalculate(piles, mid);
+            long totaltimeofkoko = helperfunctionfortimecalculate(piles, mid);
             if (totaltimeofkoko <= h) {
                 answer = mid;
                 right = mid - 1;
@@ -61,18 +60,15 @@ public class KokoEatingBananas {
     }
 
     // hel[er cuntin ]
-    public static int helperfunctionfortimecalculate(int[] piles, int k) {
+    public static long helperfunctionfortimecalculate(int[] piles, int k) {
 
         long totaltime = 0;
         for (int i : piles) {
-            // no need to call other ceil funtion 
+            // no need call other function 
             totaltime += ((i - 1) / k + 1); // add time with prevous time with uppr value
         }
         return totaltime;
 
     }
-
-    public static void main(String[] args) {
-
-    }
+}
 }
