@@ -6,9 +6,7 @@ public class KokoEatingBananas {
         int right = 0;
         for (int i : piles) {
 
-            if (right < i) {
-                right = i;
-            }
+            right = Math.max(i, right)
         }
         int answer = -1;
 
