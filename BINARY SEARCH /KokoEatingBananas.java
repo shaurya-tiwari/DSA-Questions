@@ -65,7 +65,7 @@ public class KokoEatingBananas {
 
         int totaltime = 0;
         for (int i : piles) {
-            totaltime += Math.ceil((double) i / k); // add time with prevous time with uppr value
+            totaltime += ((i - 1) / k + 1); // add time with prevous time with uppr value
         }
         return totaltime;
 
