@@ -63,8 +63,9 @@ public class KokoEatingBananas {
     // hel[er cuntin ]
     public static int helperfunctionfortimecalculate(int[] piles, int k) {
 
-        int totaltime = 0;
+        long totaltime = 0;
         for (int i : piles) {
+            // no need to call other ceil funtion 
             totaltime += ((i - 1) / k + 1); // add time with prevous time with uppr value
         }
         return totaltime;
