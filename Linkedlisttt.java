@@ -139,7 +139,6 @@ import java.util.LinkedList;
 //         // [newa]-[b]-[a]-null
 //         System.out.println(ll.getsize());
 //     }
-
 // in build features for linked lists (collection framworkks )
 // import collection framework (1)
 public class Linkedlisttt {
