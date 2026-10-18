@@ -1,0 +1,55 @@
+import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class DsaCheatSheet {
+    public static void main(String[] args) {
+                                                    
+                                                    // ==========================================
+                                                    // 1. STACK 📚 (LIFO - Last In First Out)
+                                                    // ==========================================
+        System.out.println("--- STACK ---");
+        Stack<Integer> stack = new Stack<>();
+
+        // Add karna (push)
+        stack.push(10);
+        stack.push(20);
+        stack.push(30); 
+        
+        // Dekhna ki sabse upar kya hai (peek)
+        System.out.println("Sabse upar hai: " + stack.peek()); // 30 aayega
+
+        // Upar wale ko nikalna (pop)
+        System.out.println("Bahar nikla: " + stack.pop()); // 30 bahar
+
+        // Check karna ki kya dibba khali hai?
+        System.out.println("Kya stack khali hai? " + stack.isEmpty());
+
+        // Dekhna ki andar kitne items hain
+        System.out.println("Stack mein items bache hain: " + stack.size());
+
+
+        System.out.println("\n--- QUEUE ---");
+                                                // ==========================================
+                                                // 2. QUEUE 🚶‍♂️🚶‍♀️ (FIFO - First In First Out)
+                                                // ==========================================
+        Queue<Integer> queue = new LinkedList<>();
+
+        // Line mein peeche lagna (offer / add)
+        queue.offer(10);
+        queue.offer(20);
+        queue.offer(30);
+
+        // Dekhna ki line mein sabse aage kaun hai (peek)
+        System.out.println("Sabse aage hai: " + queue.peek()); // 10 aayega
+
+        // Aage wale ko ticket dekar nikalna (poll)
+        System.out.println("Line se bahar gaya: " + queue.poll()); // 10 bahar
+
+        // Check karna ki kya line khali hai?
+        System.out.println("Kya queue khali hai? " + queue.isEmpty());
+
+        // Dekhna ki line mein kitne log bache hain
+        System.out.println("Queue mein log bache hain: " + queue.size());
+    }
+}
