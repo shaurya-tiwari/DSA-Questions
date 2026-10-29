@@ -27,26 +27,28 @@ public class CC {
             return;
         }
 
-        if (level == list.size()) { // for check
+        if (level == list.size()) { // for check list size 
             list.add(root.val);
         }
         // for right view , we gor right first
         dfs(root.right, level + 1, list);
         dfs(root.left, level + 1, list);
 
+        //for left vie=se versa
+
     }
 
     public static void main(String[] args) {
         // filliuing laues in tree node
-        cc cc = new CC();
-        cc.rightview()
+        CC cc = new CC();
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
         root.right = new TreeNode(6);
         root.left.left = new TreeNode(4);
         root.right.left = new TreeNode(9);
 
-        rightview(root);
+        List<Integer> resultprint = cc.rightview(root);
+        System.out.println(resultprint);
 
     }
 }
